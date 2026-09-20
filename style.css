@@ -1,0 +1,173 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #111827;
+    color: white;
+
+    padding: 20px;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 650px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+#status {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+button {
+    border: none;
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+#board {
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 1 / 1;
+
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+
+    border: 5px solid #374151;
+}
+
+.square {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: clamp(50px, 11vw, 90px);
+
+    cursor: pointer;
+
+    user-select: none;
+}
+
+.white-piece {
+    color: white;
+    text-shadow: 0 2px 3px black;
+}
+
+.black-piece {
+    color: black;
+    text-shadow: 0 2px 3px white;
+}
+
+.light {
+    background: #eeeed2;
+}
+
+.dark {
+    background: #769656;
+}
+
+.selected {
+    outline: 4px solid #facc15;
+    outline-offset: -4px;
+}
+
+.legal-move {
+    box-shadow: inset 0 0 0 6px rgba(34, 197, 94, 0.6);
+}
+
+.capture-move {
+    box-shadow: inset 0 0 0 6px rgba(239, 68, 68, 0.6);
+}
+
+.check {
+    background: #dc2626 !important;
+}
+
+.controls {
+    margin-top: 15px;
+}
+
+.move-section {
+    margin-top: 25px;
+
+    background: #1f2937;
+
+    padding: 15px;
+
+    border-radius: 10px;
+}
+
+.move-section h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#moveHistory {
+    max-height: 150px;
+    overflow-y: auto;
+
+    text-align: left;
+
+    line-height: 1.8;
+}
+
+.move {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .game-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #board {
+        border-width: 3px;
+    }
+}

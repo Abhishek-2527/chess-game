@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JavaScript Chess Game</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="game-container">
+
+        <h1>♟ Chess Game</h1>
+
+        <div class="game-info">
+            <div id="status">White's turn</div>
+            <button id="resetBtn">New Game</button>
+        </div>
+
+        <div id="board"></div>
+
+        <div class="controls">
+            <button id="undoBtn">Undo Move</button>
+        </div>
+
+        <div class="move-section">
+            <h2>Move History</h2>
+            <div id="moveHistory"></div>
+        </div>
+
+    </div>
+
+    <!-- Chess.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
