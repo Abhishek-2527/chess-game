@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>JavaScript Chess Game</title>
+    <title>Professional Chess Game</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,30 +14,133 @@
 
     <div class="game-container">
 
-        <h1>♟ Chess Game</h1>
+        <header class="game-header">
+            <h1>♟ Chess Game</h1>
+            <p>Two Player Chess</p>
+        </header>
 
-        <div class="game-info">
-            <div id="status">White's turn</div>
-            <button id="resetBtn">New Game</button>
+
+        <div class="game-layout">
+
+            <!-- LEFT SIDEBAR -->
+            <aside class="sidebar">
+
+                <div class="captured-box">
+
+                    <h2>Captured Pieces</h2>
+
+                    <div class="captured-player">
+                        <h3>White Lost</h3>
+                        <div id="whiteCaptured" class="captured-pieces">
+                            <span class="empty-message">None</span>
+                        </div>
+                    </div>
+
+                    <div class="captured-player">
+                        <h3>Black Lost</h3>
+                        <div id="blackCaptured" class="captured-pieces">
+                            <span class="empty-message">None</span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- GAME CONTROLS -->
+                <div class="controls">
+
+                    <button id="undoBtn">
+                        ↶ Undo Move
+                    </button>
+
+                    <button id="resetBtn">
+                        ↻ New Game
+                    </button>
+
+                </div>
+
+            </aside>
+
+
+            <!-- MAIN GAME -->
+            <main class="game-area">
+
+                <!-- PLAYER INFORMATION -->
+                <div class="player-bar black-player">
+
+                    <div class="player-info">
+                        <span class="player-icon">♟</span>
+
+                        <div>
+                            <strong>Black</strong>
+                            <small>Player 2</small>
+                        </div>
+                    </div>
+
+                    <div id="blackTimer" class="timer">
+                        10:00
+                    </div>
+
+                </div>
+
+
+                <!-- CHESS BOARD -->
+                <div class="board-wrapper">
+
+                    <div id="board"></div>
+
+                </div>
+
+
+                <!-- WHITE PLAYER -->
+                <div class="player-bar white-player">
+
+                    <div class="player-info">
+                        <span class="player-icon">♙</span>
+
+                        <div>
+                            <strong>White</strong>
+                            <small>Player 1</small>
+                        </div>
+                    </div>
+
+                    <div id="whiteTimer" class="timer active-timer">
+                        10:00
+                    </div>
+
+                </div>
+
+
+                <!-- GAME STATUS -->
+                <div id="status" class="status">
+                    White's turn
+                </div>
+
+            </main>
+
         </div>
 
-        <div id="board"></div>
 
-        <div class="controls">
-            <button id="undoBtn">Undo Move</button>
-        </div>
+        <!-- MOVE HISTORY -->
+        <section class="move-section">
 
-        <div class="move-section">
             <h2>Move History</h2>
-            <div id="moveHistory"></div>
-        </div>
+
+            <div id="moveHistory" class="move-history">
+                No moves yet.
+            </div>
+
+        </section>
 
     </div>
+
 
     <!-- Chess.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 
+    <!-- Our JavaScript -->
     <script src="script.js"></script>
 
 </body>
+
 </html>

@@ -1,3 +1,7 @@
+/* ==============================
+   GLOBAL
+================================ */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,97 +10,396 @@
 
 body {
     min-height: 100vh;
-    font-family: Arial, sans-serif;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
 
     background: #111827;
     color: white;
 
-    padding: 20px;
+    padding: 25px;
 }
+
+
+/* ==============================
+   MAIN CONTAINER
+================================ */
 
 .game-container {
     width: 100%;
-    max-width: 650px;
-    text-align: center;
+    max-width: 1150px;
+    margin: auto;
 }
 
-h1 {
+
+/* ==============================
+   HEADER
+================================ */
+
+.game-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.game-header h1 {
+    font-size: 34px;
+    margin-bottom: 5px;
+}
+
+.game-header p {
+    color: #9ca3af;
+}
+
+
+/* ==============================
+   GAME LAYOUT
+================================ */
+
+.game-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 25px;
+    align-items: start;
+}
+
+
+/* ==============================
+   SIDEBAR
+================================ */
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+/* ==============================
+   CAPTURED PIECES BOX
+================================ */
+
+.captured-box {
+    background: #1f2937;
+
+    border-radius: 15px;
+
+    padding: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.captured-box h2 {
+    font-size: 20px;
+
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid #374151;
+
+    padding-bottom: 10px;
+}
+
+
+/* ==============================
+   CAPTURED PLAYER
+================================ */
+
+.captured-player {
     margin-bottom: 20px;
 }
 
-.game-info {
+.captured-player h3 {
+    font-size: 14px;
+
+    color: #9ca3af;
+
+    margin-bottom: 8px;
+}
+
+
+/* ==============================
+   CAPTURED PIECES AREA
+================================ */
+
+.captured-pieces {
+    min-height: 55px;
+
+    padding: 8px;
+
+    border-radius: 10px;
+
+    background: #111827;
+
     display: flex;
-    justify-content: space-between;
+
+    flex-wrap: wrap;
+
     align-items: center;
 
-    margin-bottom: 15px;
+    gap: 2px;
 }
 
-#status {
-    font-size: 18px;
-    font-weight: bold;
+
+/* ==============================
+   CAPTURED PIECE SIZE
+================================ */
+
+.captured-piece {
+    font-size: 32px;
+
+    line-height: 1;
 }
 
-button {
+
+/* ==============================
+   EMPTY MESSAGE
+================================ */
+
+.empty-message {
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+
+/* ==============================
+   CONTROLS
+================================ */
+
+.controls {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.controls button {
     border: none;
-    padding: 10px 16px;
 
-    border-radius: 8px;
+    padding: 13px;
+
+    border-radius: 10px;
 
     background: #2563eb;
+
     color: white;
 
     font-size: 15px;
+
     font-weight: bold;
 
     cursor: pointer;
+
+    transition: 0.2s;
 }
 
-button:hover {
-    opacity: 0.85;
+
+.controls button:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-2px);
 }
+
+
+.controls button:active {
+    transform: scale(0.97);
+}
+
+
+/* ==============================
+   GAME AREA
+================================ */
+
+.game-area {
+    width: 100%;
+
+    max-width: 700px;
+
+    margin: auto;
+}
+
+
+/* ==============================
+   PLAYER BAR
+================================ */
+
+.player-bar {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    background: #1f2937;
+
+    padding: 12px 18px;
+
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+}
+
+
+.player-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.player-icon {
+    font-size: 32px;
+}
+
+
+.player-info strong {
+    display: block;
+
+    font-size: 16px;
+}
+
+
+.player-info small {
+    color: #9ca3af;
+
+    font-size: 12px;
+}
+
+
+/* ==============================
+   TIMER
+================================ */
+
+.timer {
+    background: #030712;
+
+    color: white;
+
+    padding: 8px 16px;
+
+    border-radius: 8px;
+
+    font-family: "Courier New", monospace;
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    border: 2px solid #374151;
+
+    min-width: 90px;
+
+    text-align: center;
+}
+
+
+/* Active timer */
+
+.active-timer {
+    border-color: #22c55e;
+
+    color: #22c55e;
+
+    box-shadow:
+        0 0 12px rgba(34, 197, 94, 0.25);
+}
+
+
+/* Timer warning */
+
+.timer-warning {
+    color: #f59e0b;
+
+    border-color: #f59e0b;
+}
+
+
+/* Timer danger */
+
+.timer-danger {
+    color: #ef4444;
+
+    border-color: #ef4444;
+
+    animation: timerPulse 1s infinite;
+}
+
+
+@keyframes timerPulse {
+    50% {
+        opacity: 0.5;
+    }
+}
+
+
+/* ==============================
+   CHESS BOARD WRAPPER
+================================ */
+
+.board-wrapper {
+    width: 100%;
+
+    padding: 5px;
+
+    background: #374151;
+
+    border-radius: 8px;
+}
+
+
+/* ==============================
+   CHESS BOARD
+================================ */
 
 #board {
     width: 100%;
-    max-width: 600px;
+
     aspect-ratio: 1 / 1;
 
-    margin: auto;
-
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
 
-    border: 5px solid #374151;
+    grid-template-columns: repeat(8, 1fr);
 }
+
+
+/* ==============================
+   CHESS SQUARE
+================================ */
 
 .square {
     width: 100%;
+
     aspect-ratio: 1 / 1;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
-    font-size: clamp(50px, 11vw, 90px);
+    /*
+        VERY LARGE CHESS PIECES
+    */
+
+    font-size: clamp(50px, 10vw, 90px);
+
+    line-height: 0.9;
 
     cursor: pointer;
 
     user-select: none;
+
+    transition: 0.1s;
+
+    overflow: hidden;
 }
 
-.white-piece {
-    color: white;
-    text-shadow: 0 2px 3px black;
-}
 
-.black-piece {
-    color: black;
-    text-shadow: 0 2px 3px white;
-}
+/* ==============================
+   BOARD COLORS
+================================ */
 
 .light {
     background: #eeeed2;
@@ -106,68 +409,219 @@ button:hover {
     background: #769656;
 }
 
-.selected {
-    outline: 4px solid #facc15;
-    outline-offset: -4px;
+
+/* ==============================
+   WHITE CHESS PIECES
+================================ */
+
+.white-piece {
+    color: white;
+
+    font-weight: 900;
+
+    text-shadow:
+        0 2px 4px black,
+        0 0 3px black;
 }
+
+
+/* ==============================
+   BLACK CHESS PIECES
+================================ */
+
+.black-piece {
+    color: black;
+
+    font-weight: 900;
+
+    text-shadow:
+        0 1px 3px white;
+}
+
+
+/* ==============================
+   SELECTED PIECE
+================================ */
+
+.selected {
+    outline: 5px solid #facc15;
+
+    outline-offset: -5px;
+}
+
+
+/* ==============================
+   LEGAL MOVE
+================================ */
 
 .legal-move {
-    box-shadow: inset 0 0 0 6px rgba(34, 197, 94, 0.6);
+    box-shadow:
+        inset 0 0 0 7px
+        rgba(34, 197, 94, 0.55);
 }
 
+
+/* ==============================
+   CAPTURE MOVE
+================================ */
+
 .capture-move {
-    box-shadow: inset 0 0 0 6px rgba(239, 68, 68, 0.6);
+    box-shadow:
+        inset 0 0 0 7px
+        rgba(239, 68, 68, 0.65);
 }
+
+
+/* ==============================
+   CHECK
+================================ */
 
 .check {
     background: #dc2626 !important;
 }
 
-.controls {
-    margin-top: 15px;
+
+/* ==============================
+   GAME STATUS
+================================ */
+
+.status {
+    margin-top: 12px;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    background: #1f2937;
+
+    text-align: center;
+
+    font-weight: bold;
+
+    color: #e5e7eb;
 }
+
+
+/* ==============================
+   MOVE HISTORY
+================================ */
 
 .move-section {
     margin-top: 25px;
 
     background: #1f2937;
 
-    padding: 15px;
+    padding: 20px;
 
-    border-radius: 10px;
+    border-radius: 15px;
 }
+
 
 .move-section h2 {
     font-size: 20px;
-    margin-bottom: 10px;
+
+    margin-bottom: 15px;
 }
 
-#moveHistory {
-    max-height: 150px;
+
+.move-history {
+    max-height: 180px;
+
     overflow-y: auto;
 
-    text-align: left;
+    color: #d1d5db;
 
     line-height: 1.8;
 }
 
+
 .move {
     display: inline-block;
-    margin-right: 15px;
+
+    margin-right: 20px;
 }
 
-@media (max-width: 600px) {
+
+/* ==============================
+   HOVER EFFECT
+================================ */
+
+.square:hover {
+    filter: brightness(1.08);
+}
+
+
+/* ==============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 850px) {
+
+    .game-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        order: 2;
+    }
+
+    .game-area {
+        order: 1;
+    }
+
+    .captured-box {
+        width: 100%;
+    }
+
+    .controls {
+        flex-direction: row;
+    }
+
+    .controls button {
+        flex: 1;
+    }
+}
+
+
+/* ==============================
+   MOBILE
+================================ */
+
+@media (max-width: 500px) {
 
     body {
         padding: 10px;
     }
 
-    .game-info {
-        flex-direction: column;
-        gap: 10px;
+    .game-header h1 {
+        font-size: 27px;
     }
 
-    #board {
-        border-width: 3px;
+    .player-bar {
+        padding: 8px 10px;
+    }
+
+    .timer {
+        font-size: 19px;
+
+        min-width: 75px;
+
+        padding: 6px 8px;
+    }
+
+    .player-icon {
+        font-size: 25px;
+    }
+
+    /*
+        Large pieces on mobile
+    */
+
+    .square {
+        font-size: clamp(38px, 12vw, 65px);
+    }
+
+    .captured-piece {
+        font-size: 26px;
     }
 }
