@@ -325,61 +325,71 @@ body {
 }
 
 
-/* ==============================
-   CHESS BOARD WRAPPER
-================================ */
+/* =========================
+   CHESS BOARD
+========================= */
 
 .board-wrapper {
-    width: 100%;
-
-    padding: 5px;
-
-    background: #374151;
-
-    border-radius: 8px;
+    width: min(90vw, 720px);
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
-
-/* ==============================
-   CHESS BOARD
-================================ */
 
 #board {
     width: 100%;
-
     aspect-ratio: 1 / 1;
 
     display: grid;
-
     grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+
+    overflow: hidden;
+    border-radius: 8px;
+    box-sizing: border-box;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
 
-/* ==============================
+/* =========================
    CHESS SQUARE
-================================ */
+========================= */
 
 .square {
-    width: 100%;
     aspect-ratio: 1 / 1;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    cursor: pointer;
-    user-select: none;
-
-    transition: 0.1s;
-
-    overflow: hidden;
-
     position: relative;
+    box-sizing: border-box;
+
+    cursor: pointer;
 }
 
-/* ==============================
-   CHESS PIECE IMAGES
-================================ */
+
+/* LIGHT SQUARE */
+
+.square.light {
+    background: #eeeed2;
+}
+
+
+/* DARK SQUARE */
+
+.square.dark {
+    background: #769656;
+}
+
+
+/* =========================
+   CHESS PIECES
+========================= */
 
 .chess-piece {
     width: 88%;
@@ -390,10 +400,13 @@ body {
     display: block;
 
     pointer-events: none;
-
     user-select: none;
 
     transition: transform 0.15s ease;
+}
+
+.square:hover .chess-piece {
+    transform: scale(1.04);
 }
 
 
@@ -538,37 +551,39 @@ body {
 }
 
 
-/* ==============================
-   RESPONSIVE
-================================ */
+/* =========================
+   RESPONSIVE CHESS BOARD
+========================= */
 
-@media (max-width: 850px) {
+@media (max-width: 768px) {
 
-    .game-layout {
-        grid-template-columns: 1fr;
+    .board-wrapper {
+        width: 94vw;
+        max-width: 600px;
     }
 
-    .sidebar {
-        order: 2;
-    }
-
-    .game-area {
-        order: 1;
-    }
-
-    .captured-box {
+    #board {
         width: 100%;
     }
 
-    .controls {
-        flex-direction: row;
-    }
-
-    .controls button {
-        flex: 1;
+    .chess-piece {
+        width: 90%;
+        height: 90%;
     }
 }
 
+
+@media (max-width: 480px) {
+
+    .board-wrapper {
+        width: 96vw;
+    }
+
+    .chess-piece {
+        width: 92%;
+        height: 92%;
+    }
+}
 
 /* ==============================
    MOBILE
