@@ -3,11 +3,9 @@
 ========================================= */
 
 const board = document.getElementById("board");
-
 const statusText = document.getElementById("status");
 
 const resetBtn = document.getElementById("resetBtn");
-
 const undoBtn = document.getElementById("undoBtn");
 
 const moveHistory = document.getElementById("moveHistory");
@@ -36,15 +34,11 @@ let selectedSquare = null;
 
 /* =========================================
    TIMER
-=========================================
-
-   Each player gets 10 minutes.
 ========================================= */
 
 const INITIAL_TIME = 10 * 60;
 
 let whiteTime = INITIAL_TIME;
-
 let blackTime = INITIAL_TIME;
 
 let timerInterval = null;
@@ -55,29 +49,23 @@ let timerInterval = null;
 ========================================= */
 
 const pieces = {
-
     w: {
-
-        p: "♙",
-        r: "♖",
-        n: "♘",
-        b: "♗",
-        q: "♕",
-        k: "♔"
-
+        p: "https://raw.githubusercontent.com/ornicar/lila/master/public/piece/cburnett/wP.svg",
+        r: "https://raw.githubusercontent.com/ornicar/lila/master/public/piece/cburnett/wR.svg",
+        n: "https://raw.githubusercontent.com/ornicar/lila/master/public/piece/cburnett/wN.svg",
+        b: "https://raw.githubusercontent.com/ornicar/lila/master/public/piece/cburnett/wB.svg",
+        q: "https://raw.githubusercontent.com/ornicar/lila/master/public/piece/cburnett/wQ.svg",
+        k: "https://raw.githubusercontent.com/ornicar/lila/master/public/piece/cburnett/wK.svg"
     },
 
     b: {
-
-        p: "♟",
-        r: "♜",
-        n: "♞",
-        b: "♝",
-        q: "♛",
-        k: "♚"
-
+        p: "https://raw.githubusercontent.com/ornicar/lila/master/public/piece/cburnett/bP.svg",
+        r: "https://raw.githubusercontent.com/ornicar/lila/master/public/piece/cburnett/bR.svg",
+        n: "https://raw.githubusercontent.com/ornicar/lila/master/public/piece/cburnett/bN.svg",
+        b: "https://raw.githubusercontent.com/ornicar/lila/master/public/piece/cburnett/bB.svg",
+        q: "https://raw.githubusercontent.com/ornicar/lila/master/public/piece/cburnett/bQ.svg",
+        k: "https://raw.githubusercontent.com/ornicar/lila/master/public/piece/cburnett/bK.svg"
     }
-
 };
 
 
@@ -118,7 +106,6 @@ function createBoard() {
 
     const boardState = game.board();
 
-
     for (let row = 0; row < 8; row++) {
 
         for (let col = 0; col < 8; col++) {
@@ -126,13 +113,10 @@ function createBoard() {
             const square =
                 document.createElement("div");
 
-
             const squareName =
                 files[col] + ranks[row];
 
-
-            square.dataset.square =
-                squareName;
+            square.dataset.square = squareName;
 
 
             /* Board colors */
@@ -148,38 +132,45 @@ function createBoard() {
             }
 
 
-            /* Piece */
+            /* =================================
+               PIECE
+            ================================= */
 
             const piece =
                 boardState[row][col];
 
-
             if (piece) {
 
-                square.textContent =
+                const img =
+                    document.createElement("img");
+
+                img.src =
                     pieces[piece.color][piece.type];
 
+                img.alt =
+                    `${piece.color === "w" ? "White" : "Black"} ${piece.type}`;
 
-                /*
-                    Add white / black class
-                */
+                img.classList.add("chess-piece");
+
+                square.appendChild(img);
 
                 square.classList.add(
-
                     piece.color === "w"
                         ? "white-piece"
                         : "black-piece"
-
                 );
 
             }
 
 
+            /* =================================
+               CLICK EVENT
+            ================================= */
+
             square.addEventListener(
                 "click",
                 () => handleSquareClick(squareName)
             );
-
 
             board.appendChild(square);
 
@@ -200,9 +191,7 @@ function createBoard() {
 function handleSquareClick(square) {
 
     if (game.game_over()) {
-
         return;
-
     }
 
 
@@ -210,25 +199,21 @@ function handleSquareClick(square) {
         game.get(square);
 
 
-    /* Nothing selected */
+    /* =================================
+       NOTHING SELECTED
+    ================================= */
 
     if (!selectedSquare) {
 
         if (!piece) {
-
             return;
-
         }
 
 
-        /*
-            Only current player's piece
-        */
+        /* Only current player's piece */
 
         if (piece.color !== game.turn()) {
-
             return;
-
         }
 
 
@@ -237,11 +222,12 @@ function handleSquareClick(square) {
         highlightSelectedSquare();
 
         return;
-
     }
 
 
-    /* Click same piece */
+    /* =================================
+       CLICK SAME PIECE
+    ================================= */
 
     if (selectedSquare === square) {
 
@@ -250,13 +236,12 @@ function handleSquareClick(square) {
         createBoard();
 
         return;
-
     }
 
 
-    /*
-        Try to make move
-    */
+    /* =================================
+       TRY TO MAKE MOVE
+    ================================= */
 
     const move =
         makeMove(
@@ -281,9 +266,7 @@ function handleSquareClick(square) {
 
     } else {
 
-        /*
-            Select another own piece
-        */
+        /* Select another own piece */
 
         if (
             piece &&
@@ -315,14 +298,11 @@ function makeMove(from, to) {
 
             to: to,
 
-            /*
-                Automatic queen promotion
-            */
+            /* Automatic queen promotion */
 
             promotion: "q"
 
         });
-
 
         return move;
 
@@ -336,7 +316,7 @@ function makeMove(from, to) {
 
 
 /* =========================================
-   HIGHLIGHT SELECTED
+   HIGHLIGHT SELECTED SQUARE
 ========================================= */
 
 function highlightSelectedSquare() {
@@ -363,25 +343,20 @@ function highlightSelectedSquare() {
 
 
 /* =========================================
-   LEGAL MOVES
+   HIGHLIGHT LEGAL MOVES
 ========================================= */
 
 function highlightLegalMoves() {
 
     if (!selectedSquare) {
-
         return;
-
     }
 
 
     const moves =
         game.moves({
-
             square: selectedSquare,
-
             verbose: true
-
         });
 
 
@@ -394,9 +369,7 @@ function highlightLegalMoves() {
 
 
         if (!target) {
-
             return;
-
         }
 
 
@@ -426,15 +399,12 @@ function highlightLegalMoves() {
 function highlightCheck() {
 
     if (!game.in_check()) {
-
         return;
-
     }
 
 
     const kingColor =
         game.turn();
-
 
     const boardState =
         game.board();
@@ -487,6 +457,8 @@ function highlightCheck() {
 
 function updateGameStatus() {
 
+    /* Checkmate */
+
     if (game.in_checkmate()) {
 
         stopTimer();
@@ -501,53 +473,50 @@ function updateGameStatus() {
         statusText.textContent =
             `♚ Checkmate! ${winner} wins.`;
 
-
         return;
-
     }
 
+
+    /* Stalemate */
 
     if (game.in_stalemate()) {
 
         stopTimer();
 
-
         statusText.textContent =
             "Draw — Stalemate.";
 
-
         return;
-
     }
 
+
+    /* Threefold repetition */
 
     if (game.in_threefold_repetition()) {
 
         stopTimer();
 
-
         statusText.textContent =
             "Draw — Threefold repetition.";
 
-
         return;
-
     }
 
+
+    /* Insufficient material */
 
     if (game.insufficient_material()) {
 
         stopTimer();
 
-
         statusText.textContent =
             "Draw — Insufficient material.";
 
-
         return;
-
     }
 
+
+    /* Check */
 
     if (game.in_check()) {
 
@@ -560,11 +529,11 @@ function updateGameStatus() {
         statusText.textContent =
             `⚠ ${player} is in check!`;
 
-
         return;
-
     }
 
+
+    /* Normal turn */
 
     const player =
         game.turn() === "w"
@@ -584,47 +553,34 @@ function updateGameStatus() {
 
 function updateCapturedPieces() {
 
-    /*
-        Get complete move history
-    */
-
     const history =
         game.history({
             verbose: true
         });
 
 
-    /*
-        Clear old captured pieces
-    */
+    /* Clear old captured pieces */
 
     whiteCaptured.innerHTML = "";
-
     blackCaptured.innerHTML = "";
 
 
     let whiteLost = [];
-
     let blackLost = [];
 
 
-    /*
-        Find captured pieces
-    */
+    /* =================================
+       FIND CAPTURED PIECES
+    ================================= */
 
     history.forEach(move => {
 
         if (!move.captured) {
-
             return;
-
         }
 
 
         /*
-            The moving piece's color
-            determines whose piece died.
-
             White moves -> Black piece captured
             Black moves -> White piece captured
         */
@@ -641,24 +597,20 @@ function updateCapturedPieces() {
 
         if (capturedColor === "w") {
 
-            whiteLost.push(
-                capturedPiece
-            );
+            whiteLost.push(capturedPiece);
 
         } else {
 
-            blackLost.push(
-                capturedPiece
-            );
+            blackLost.push(capturedPiece);
 
         }
 
     });
 
 
-    /*
-        Display White's lost pieces
-    */
+    /* =================================
+       WHITE LOST PIECES
+    ================================= */
 
     if (whiteLost.length === 0) {
 
@@ -670,13 +622,16 @@ function updateCapturedPieces() {
         whiteLost.forEach(piece => {
 
             const element =
-                document.createElement("span");
+                document.createElement("img");
 
             element.className =
-                "captured-piece white-piece";
+                "captured-piece";
 
-            element.textContent =
+            element.src =
                 piece;
+
+            element.alt =
+                "Captured white piece";
 
             whiteCaptured.appendChild(
                 element
@@ -687,9 +642,9 @@ function updateCapturedPieces() {
     }
 
 
-    /*
-        Display Black's lost pieces
-    */
+    /* =================================
+       BLACK LOST PIECES
+    ================================= */
 
     if (blackLost.length === 0) {
 
@@ -701,13 +656,16 @@ function updateCapturedPieces() {
         blackLost.forEach(piece => {
 
             const element =
-                document.createElement("span");
+                document.createElement("img");
 
             element.className =
-                "captured-piece black-piece";
+                "captured-piece";
 
-            element.textContent =
+            element.src =
                 piece;
+
+            element.alt =
+                "Captured black piece";
 
             blackCaptured.appendChild(
                 element
@@ -739,7 +697,6 @@ function updateMoveHistory() {
             "No moves yet.";
 
         return;
-
     }
 
 
@@ -788,36 +745,27 @@ function updateMoveHistory() {
 
 function startTimer() {
 
-    /*
-        Prevent multiple timers
-    */
+    /* Prevent multiple timers */
 
     if (timerInterval !== null) {
-
         return;
-
     }
 
 
     timerInterval =
         setInterval(() => {
 
-            /*
-                Stop if game has ended
-            */
+            /* Stop if game has ended */
 
             if (game.game_over()) {
 
                 stopTimer();
 
                 return;
-
             }
 
 
-            /*
-                White's turn
-            */
+            /* White's turn */
 
             if (game.turn() === "w") {
 
@@ -825,9 +773,8 @@ function startTimer() {
 
             }
 
-            /*
-                Black's turn
-            */
+
+            /* Black's turn */
 
             else {
 
@@ -839,9 +786,7 @@ function startTimer() {
             updateTimerDisplay();
 
 
-            /*
-                Time reached zero
-            */
+            /* Time reached zero */
 
             if (
                 whiteTime <= 0 ||
@@ -907,9 +852,7 @@ function updateTimerDisplay() {
         formatTime(blackTime);
 
 
-    /*
-        Remove previous styles
-    */
+    /* Remove previous styles */
 
     whiteTimer.classList.remove(
         "active-timer",
@@ -925,9 +868,7 @@ function updateTimerDisplay() {
     );
 
 
-    /*
-        Determine active player
-    */
+    /* Determine active player */
 
     if (game.turn() === "w") {
 
@@ -944,9 +885,7 @@ function updateTimerDisplay() {
     }
 
 
-    /*
-        Warning below 60 seconds
-    */
+    /* Warning below 60 seconds */
 
     if (
         whiteTime <= 60 &&
@@ -972,9 +911,7 @@ function updateTimerDisplay() {
     }
 
 
-    /*
-        Danger below 10 seconds
-    */
+    /* Danger below 10 seconds */
 
     if (whiteTime <= 10) {
 
@@ -1041,8 +978,7 @@ undoBtn.addEventListener(
     () => {
 
         /*
-            Don't undo after game has ended
-            due to timeout
+            Don't undo after timeout
         */
 
         if (
@@ -1052,6 +988,13 @@ undoBtn.addEventListener(
 
             return;
 
+        }
+
+
+        /* Don't call undo if there are no moves */
+
+        if (game.history().length === 0) {
+            return;
         }
 
 
@@ -1089,9 +1032,7 @@ resetBtn.addEventListener(
         selectedSquare = null;
 
 
-        /*
-            Reset timers
-        */
+        /* Reset timers */
 
         whiteTime =
             INITIAL_TIME;
@@ -1109,6 +1050,13 @@ resetBtn.addEventListener(
         updateCapturedPieces();
 
         updateTimerDisplay();
+
+
+        /* Make sure timer is running */
+
+        if (timerInterval === null) {
+            startTimer();
+        }
 
     }
 );

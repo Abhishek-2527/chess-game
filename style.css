@@ -119,22 +119,13 @@ body {
    CAPTURED PIECES AREA
 ================================ */
 
-.captured-pieces {
-    min-height: 55px;
+.captured-piece {
+    width: 38px;
+    height: 38px;
 
-    padding: 8px;
+    object-fit: contain;
 
-    border-radius: 10px;
-
-    background: #111827;
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    align-items: center;
-
-    gap: 2px;
+    display: block;
 }
 
 
@@ -370,30 +361,46 @@ body {
 
 .square {
     width: 100%;
-
     aspect-ratio: 1 / 1;
 
     display: flex;
-
     justify-content: center;
-
     align-items: center;
 
-    /*
-        VERY LARGE CHESS PIECES
-    */
-
-    font-size: clamp(50px, 10vw, 90px);
-
-    line-height: 0.9;
-
     cursor: pointer;
-
     user-select: none;
 
     transition: 0.1s;
 
     overflow: hidden;
+
+    position: relative;
+}
+
+/* ==============================
+   CHESS PIECE IMAGES
+================================ */
+
+.chess-piece {
+    width: 88%;
+    height: 88%;
+
+    object-fit: contain;
+
+    display: block;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    transition: transform 0.15s ease;
+}
+
+
+/* Slight hover effect */
+
+.square:hover .chess-piece {
+    transform: scale(1.04);
 }
 
 
@@ -410,32 +417,12 @@ body {
 }
 
 
-/* ==============================
-   WHITE CHESS PIECES
-================================ */
-
 .white-piece {
-    color: white;
-
-    font-weight: 900;
-
-    text-shadow:
-        0 2px 4px black,
-        0 0 3px black;
+    /* White piece styling is inside the SVG */
 }
 
-
-/* ==============================
-   BLACK CHESS PIECES
-================================ */
-
-.black-piece {
-    color: black;
-
-    font-weight: 900;
-
-    text-shadow:
-        0 1px 3px white;
+.black-piece{
+    /* Black piece styling is inside the SVG */
 }
 
 
